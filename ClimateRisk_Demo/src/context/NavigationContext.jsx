@@ -1,0 +1,19 @@
+import React, { createContext, useContext } from 'react';
+import { useNavigation } from '../hooks/useNavigation';
+
+const NavigationContext = createContext(null);
+
+export function NavigationProvider({ children }) {
+  const nav = useNavigation();
+  return (
+    <NavigationContext.Provider value={nav}>
+      {children}
+    </NavigationContext.Provider>
+  );
+}
+
+export function useNavigationContext() {
+  const ctx = useContext(NavigationContext);
+  if (!ctx) throw new Error('useNavigationContext must be used within NavigationProvider');
+  return ctx;
+}

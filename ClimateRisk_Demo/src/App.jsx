@@ -4,13 +4,25 @@ import { Header } from './components/layout/Header';
 import { SectorScreen } from './components/screens/SectorScreen';
 import { CompaniesScreen } from './components/screens/CompaniesScreen';
 import { DashboardScreen } from './components/screens/DashboardScreen';
-import { useNavigation, SCREENS } from './hooks/useNavigation';
+import { FavoritesScreen } from './screens/FavoritesScreen';
+import { LandingScreen } from './screens/LandingScreen';
+import { SCREENS } from './hooks/useNavigation';
+import { FavoritesProvider } from './context/FavoritesContext';
+import { NavigationProvider, useNavigationContext } from './context/NavigationContext';
 
-export default function App() {
-  const nav = useNavigation();
+function AppContent() {
+  const nav = useNavigationContext();
 
   const renderScreen = () => {
     switch (nav.screen) {
+      case SCREENS.LANDING:
+        return (
+          <LandingScreen
+            key="landing"
+            onEnter={nav.goToSectors}
+            onGoToDashboard={nav.goToDashboard}
+          />
+        );
       case SCREENS.COMPANIES:
         return (
           <CompaniesScreen
@@ -27,6 +39,13 @@ export default function App() {
             onBackSectors={nav.goToSectors}
           />
         );
+      case SCREENS.FAVORITES:
+        return (
+          <FavoritesScreen
+            key="favorites"
+            onGoToDashboard={nav.goToDashboard}
+          />
+        );
       default:
         return (
           <SectorScreen
@@ -38,11 +57,21 @@ export default function App() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#050a18' }}>
+    <div style={{ minHeight: '100vh', backgroundColor: '#020202' }}>
       <Header />
-      <div className="fade-in" key={nav.screen}>
+      <div className="screen-fade" key={nav.screen}>
         {renderScreen()}
       </div>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationProvider>
+      <FavoritesProvider>
+        <AppContent />
+      </FavoritesProvider>
+    </NavigationProvider>
   );
 }

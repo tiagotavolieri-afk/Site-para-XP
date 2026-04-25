@@ -1,164 +1,132 @@
 import React from 'react';
-import { ChevronRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Wheat, Zap, Droplets, Mountain, Shield, TreePine, Truck, Home } from 'lucide-react';
 import { SECTORS } from '../../data/sectors';
+import { useNavigationContext } from '../../context/NavigationContext';
 
-function SectorCard({ sector, onClick, delay }) {
-  const isActive = sector.available;
-
-  return (
-    <div
-      className={`cr-card fade-in fade-in-delay-${delay} ${isActive ? 'cr-card-interactive cr-card-active-sector' : ''} ${isActive ? 'glow-active' : ''}`}
-      onClick={isActive ? onClick : undefined}
-      style={{
-        padding: '24px',
-        cursor: isActive ? 'pointer' : 'not-allowed',
-        opacity: isActive ? 1 : 0.38,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 12,
-        minHeight: 160,
-      }}
-    >
-      {/* Top row: icon + badge */}
-      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
-        <span style={{ fontSize: 30, lineHeight: 1 }}>{sector.icon}</span>
-        <span
-          style={{
-            fontSize: 10,
-            fontWeight: 600,
-            padding: '3px 9px',
-            borderRadius: 20,
-            background: isActive ? 'rgba(16,185,129,0.12)' : 'rgba(30,45,74,0.6)',
-            color: isActive ? '#10b981' : '#475569',
-            border: `1px solid ${isActive ? 'rgba(16,185,129,0.3)' : 'rgba(30,45,74,0.8)'}`,
-            textTransform: 'uppercase',
-            letterSpacing: '0.06em',
-            fontFamily: 'Inter, sans-serif',
-            flexShrink: 0,
-          }}
-        >
-          {isActive ? (
-            <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-              <span
-                className="pulse-dot"
-                style={{ display: 'inline-block', width: 6, height: 6, borderRadius: '50%', background: '#10b981' }}
-              />
-              {sector.badge}
-            </span>
-          ) : (
-            sector.badge
-          )}
-        </span>
-      </div>
-
-      {/* Name + desc */}
-      <div style={{ flex: 1 }}>
-        <div style={{ fontSize: 16, fontWeight: 700, color: '#f1f5f9', marginBottom: 4 }}>
-          {sector.label}
-        </div>
-        <div style={{ fontSize: 12, color: '#475569', lineHeight: 1.5 }}>{sector.desc}</div>
-      </div>
-
-      {/* CTA */}
-      {isActive && (
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 4,
-            fontSize: 12,
-            fontWeight: 600,
-            color: '#10b981',
-            marginTop: 4,
-          }}
-        >
-          {sector.coverageNote && (
-            <span style={{ marginRight: 'auto', fontSize: 10, color: '#2d4a7a' }}>
-              {sector.coverageNote}
-            </span>
-          )}
-          <span>Acessar</span>
-          <ChevronRight size={13} />
-        </div>
-      )}
-    </div>
-  );
-}
+const ICONS = {
+  agro: Wheat,
+  energy: Zap,
+  sanitation: Droplets,
+  mining: Mountain,
+  insurance: Shield,
+  paper: TreePine,
+  logistics: Truck,
+};
 
 export function SectorScreen({ onSelect }) {
+  const nav = useNavigationContext();
   return (
-    <div style={{ minHeight: 'calc(100vh - 60px)', padding: '40px 24px 80px' }}>
-      <div style={{ maxWidth: 1080, margin: '0 auto' }}>
-
-        {/* Hero */}
-        <div className="fade-in" style={{ marginBottom: 40 }}>
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 8,
-              padding: '4px 14px',
-              borderRadius: 20,
-              background: 'rgba(16,185,129,0.08)',
-              border: '1px solid rgba(16,185,129,0.2)',
-              marginBottom: 16,
-            }}
-          >
-            <div className="pulse-dot" style={{ width: 6, height: 6, borderRadius: '50%', background: '#10b981' }} />
-            <span style={{ fontSize: 11, fontWeight: 600, color: '#10b981', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-              Beta · Demo XP Investimentos
-            </span>
-          </div>
-          <h1
-            style={{
-              fontSize: 28,
-              fontWeight: 800,
-              color: '#f1f5f9',
-              letterSpacing: '-0.03em',
-              marginBottom: 10,
-              lineHeight: 1.2,
-            }}
-          >
-            Selecione um Setor
-          </h1>
-          <p style={{ fontSize: 14, color: '#64748b', maxWidth: 520, lineHeight: 1.65 }}>
-            Análise de risco climático integrada à tese de investimento. Selecione o setor
-            para acessar o monitoramento detalhado das empresas.
-          </p>
-        </div>
-
-        {/* Grid */}
-        <div
+    <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '40px 24px 80px' }}>
+      {/* Back to home */}
+      <motion.div
+        initial={{ opacity: 0, x: -10 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.25 }}
+        style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 32 }}
+      >
+        <button
+          onClick={nav.goToLanding}
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
-            gap: 16,
-            marginBottom: 40,
+            background: 'none', border: 'none', cursor: 'pointer',
+            color: '#4d6080', display: 'flex', alignItems: 'center',
+            gap: 6, fontSize: 13, fontWeight: 500, padding: 0,
+            transition: 'color 0.15s',
           }}
+          onMouseEnter={e => e.currentTarget.style.color = '#8899b4'}
+          onMouseLeave={e => e.currentTarget.style.color = '#4d6080'}
         >
-          {SECTORS.map((s, i) => (
-            <SectorCard
-              key={s.id}
-              sector={s}
-              onClick={() => onSelect(s.id)}
-              delay={Math.min(i + 1, 8)}
-            />
-          ))}
-        </div>
+          <Home size={14} />
+          Início
+        </button>
+        <span style={{ color: '#333', fontSize: 14 }}>›</span>
+        <span style={{ color: '#FBC102', fontSize: 13, fontWeight: 600 }}>Setores</span>
+      </motion.div>
 
-        {/* Footer tagline */}
-        <div
-          className="fade-in fade-in-delay-8"
-          style={{
-            textAlign: 'center',
-            paddingTop: 24,
-            borderTop: '1px solid #1a2744',
-          }}
-        >
-          <span style={{ fontSize: 12, color: '#2d4a7a' }}>
-            Plataforma desenhada para escala setorial
-          </span>
-        </div>
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, delay: 0.05 }}
+        style={{ marginBottom: 36 }}
+      >
+        <h1 style={{ fontSize: 26, fontWeight: 700, color: '#eef2f7', margin: '0 0 6px', letterSpacing: '-0.02em' }}>
+          Selecione um Setor
+        </h1>
+        <p style={{ color: '#555', fontSize: 14, margin: 0 }}>
+          Análise de risco climático por segmento
+        </p>
+      </motion.div>
+
+      <div className="grid-sectors">
+        {SECTORS.map((sector, i) => {
+          const Icon = ICONS[sector.id] || Wheat;
+          return (
+            <motion.div
+              key={sector.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: sector.available ? 1 : 0.55, y: 0 }}
+              transition={{ delay: i * 0.07, duration: 0.3 }}
+              whileHover={sector.available ? { y: -3 } : {}}
+              onClick={() => sector.available && onSelect(sector.id)}
+              style={{
+                minHeight: '170px',
+                backgroundColor: '#1F1F1F',
+                border: `1px solid ${sector.available ? 'rgba(251,193,2,0.25)' : 'rgba(255,255,255,0.05)'}`,
+                borderRadius: '14px',
+                padding: '24px',
+                cursor: sector.available ? 'pointer' : 'not-allowed',
+                transition: 'border-color 0.18s, background 0.18s',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+              }}
+              onHoverStart={e => { if (sector.available) e.target.style.borderColor = 'rgba(251,193,2,0.5)'; }}
+            >
+              <div>
+                <div style={{
+                  width: '48px', height: '48px', borderRadius: '12px',
+                  backgroundColor: sector.available ? 'rgba(251,193,2,0.1)' : 'rgba(255,255,255,0.04)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  marginBottom: '16px',
+                }}>
+                  <Icon size={24} color={sector.available ? '#FBC102' : '#555'} />
+                </div>
+                <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#f1f5f9', margin: '0 0 6px' }}>
+                  {sector.label}
+                </h3>
+                <p style={{ fontSize: '13px', color: '#64748b', lineHeight: 1.55, margin: 0 }}>
+                  {sector.desc}
+                </p>
+              </div>
+
+              <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{
+                  fontSize: '11px', fontWeight: 600, padding: '3px 10px', borderRadius: '12px',
+                  backgroundColor: sector.available ? 'rgba(0,200,187,0.12)' : 'rgba(100,116,139,0.1)',
+                  color: sector.available ? '#00C8BB' : '#64748b',
+                  border: `1px solid ${sector.available ? 'rgba(0,200,187,0.3)' : 'rgba(100,116,139,0.15)'}`,
+                }}>
+                  {sector.available && (
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+                      <span style={{
+                        width: '6px', height: '6px', borderRadius: '50%',
+                        backgroundColor: '#00C8BB', display: 'inline-block',
+                        animation: 'pulse-dot 2s ease-in-out infinite',
+                      }} />
+                      {sector.badge}
+                    </span>
+                  )}
+                  {!sector.available && sector.badge}
+                </span>
+                {sector.companiesCount && (
+                  <span style={{ fontSize: '12px', color: '#64748b' }}>
+                    {sector.companiesCount} empresas
+                  </span>
+                )}
+              </div>
+            </motion.div>
+          );
+        })}
       </div>
     </div>
   );

@@ -21,7 +21,7 @@ export function Breadcrumb({ items }) {
             {idx > 0 && (
               <ChevronRight
                 size={13}
-                style={{ color: '#2d4a7a', flexShrink: 0 }}
+                style={{ color: '#333', flexShrink: 0 }}
               />
             )}
             {item.onClick && !isLast ? (
@@ -37,7 +37,7 @@ export function Breadcrumb({ items }) {
                   padding: 0,
                   transition: 'color 0.15s ease',
                 }}
-                onMouseEnter={(e) => (e.target.style.color = '#10b981')}
+                onMouseEnter={(e) => (e.target.style.color = '#FBC102')}
                 onMouseLeave={(e) => (e.target.style.color = '#475569')}
               >
                 {item.label}
