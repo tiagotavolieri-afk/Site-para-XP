@@ -39,11 +39,11 @@ function ONICard({ oni }) {
       border: `1px solid ${color}22`,
       borderLeft: `3px solid ${color}`,
       borderRadius: 12,
-      padding: '14px 20px',
+      padding: '14px 16px',
       marginBottom: 20,
       display: 'flex',
       alignItems: 'center',
-      gap: 20,
+      gap: 16,
       flexWrap: 'wrap',
     }}>
       <div>
@@ -93,12 +93,12 @@ export function DashboardScreen({ onBackCompanies, onBackSectors }) {
   ];
 
   return (
-    <div style={{ minHeight: 'calc(100vh - 60px)', padding: '36px 24px 80px' }}>
+    <div className="cr-dashboard-root">
       <div style={{ maxWidth: 1180, margin: '0 auto' }}>
         <Breadcrumb items={breadcrumb} />
 
         {/* Company Header */}
-        <div className="cr-card fade-in" style={{ padding: '18px 22px', marginBottom: 16 }}>
+        <div className="cr-card fade-in" style={{ padding: '14px 16px', marginBottom: 16 }}>
           <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 16 }}>
             <div style={{
               width: 52, height: 52, borderRadius: 14,
@@ -166,12 +166,12 @@ export function DashboardScreen({ onBackCompanies, onBackSectors }) {
                 <Heart size={16} fill={favorited ? '#ef4444' : 'none'} />
               </button>
               <div style={{
-                display: 'flex', alignItems: 'center', gap: 7, padding: '6px 14px',
+                display: 'flex', alignItems: 'center', gap: 7, padding: '6px 12px',
                 borderRadius: 20, background: 'rgba(0,200,187,0.06)',
                 border: '1px solid rgba(0,200,187,0.18)',
               }}>
-                <div className="pulse-dot" style={{ width: 7, height: 7, borderRadius: '50%', background: '#00C8BB' }} />
-                <span style={{ fontSize: 11, fontWeight: 600, color: '#00C8BB', fontFamily: 'Inter, sans-serif' }}>
+                <div className="pulse-dot" style={{ width: 7, height: 7, borderRadius: '50%', background: '#00C8BB', flexShrink: 0 }} />
+                <span className="cr-live-text" style={{ fontSize: 11, fontWeight: 600, color: '#00C8BB', fontFamily: 'Inter, sans-serif' }}>
                   Atualizado agora
                 </span>
               </div>

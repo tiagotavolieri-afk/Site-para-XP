@@ -17,7 +17,7 @@ const ICONS = {
 export function SectorScreen({ onSelect }) {
   const nav = useNavigationContext();
   return (
-    <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '40px 24px 80px' }}>
+    <div className="cr-screen-root" style={{ maxWidth: '1100px', margin: '0 auto' }}>
       {/* Back to home */}
       <motion.div
         initial={{ opacity: 0, x: -10 }}

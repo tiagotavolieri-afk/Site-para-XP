@@ -62,7 +62,7 @@ export function RatingPanel() {
       background: 'linear-gradient(135deg, #1C1800 0%, #1F1F1F 55%, #001C1A 100%)',
       border: '1.5px solid rgba(251,193,2,0.28)',
       borderRadius: 18,
-      padding: '22px 26px',
+      padding: 'clamp(14px, 4vw, 22px) clamp(14px, 4vw, 26px)',
       boxShadow: '0 0 0 1px rgba(251,193,2,0.06), 0 8px 32px rgba(0,0,0,0.45), 0 0 70px rgba(251,193,2,0.06)',
       position: 'relative',
       overflow: 'hidden',

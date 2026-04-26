@@ -63,6 +63,7 @@ export function Header() {
 
   return (
     <header
+      className="cr-header-inner"
       style={{
         position: 'sticky',
         top: 0,
@@ -71,13 +72,12 @@ export function Header() {
         background: 'rgba(2,2,2,0.95)',
         backdropFilter: 'blur(20px)',
         WebkitBackdropFilter: 'blur(20px)',
-        padding: '0 24px',
         height: 58,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         fontFamily: 'Inter, sans-serif',
-        gap: 16,
+        gap: 8,
       }}
     >
       {/* Left: logo + back */}
@@ -106,7 +106,7 @@ export function Header() {
             onMouseLeave={e => { e.currentTarget.style.color = '#8899b4'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; }}
           >
             <ChevronLeft size={14} />
-            Voltar
+            <span className="cr-back-text">Voltar</span>
           </button>
         )}
 
@@ -245,7 +245,7 @@ export function Header() {
               onMouseLeave={e => { if (!active) { e.currentTarget.style.color = '#5a7090'; e.currentTarget.style.background = 'none'; }}}
             >
               {tab.icon}
-              {tab.label}
+              <span className="cr-nav-label">{tab.label}</span>
               {tab.badge && (
                 <span style={{
                   background: '#FBC102',
@@ -297,6 +297,7 @@ export function Header() {
             letterSpacing: '0.04em',
             whiteSpace: 'nowrap',
           }}
+          className="cr-live-text"
         >
           Dados ao vivo
         </span>

@@ -18,7 +18,7 @@ export function RatingComposition() {
         </span>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 24 }}>
+      <div className="grid-rating-comp">
         {BOA_SAFRA.ratingComposition.map((row) => {
           const cfg = CONTRIB_CONFIG[row.contributionDir] || CONTRIB_CONFIG.negative;
           return (

@@ -29,6 +29,7 @@
 
 html {
   scrollbar-gutter: stable;
+  overflow-x: hidden;
 }
 
 body {
@@ -40,8 +41,15 @@ body {
   color: var(--cr-text-1);
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent tap highlight on mobile */
+button, a {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 /* Thin scrollbar */
@@ -139,13 +147,13 @@ body {
 }
 .grid-2-col {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 16px;
   margin-bottom: 16px;
 }
 .grid-problem {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 20px;
 }
 .grid-sectors-landing {
@@ -155,7 +163,7 @@ body {
 }
 .grid-favorites {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 14px;
 }
 .steps-row {
@@ -189,20 +197,59 @@ body {
   border-radius: 16px;
 }
 
-/* ── Mobile ───────────────────────────────────────── */
+/* ── Responsive layout utilities ─────────────────── */
+/* Applied via className so media queries can override inline styles */
+.cr-header-inner     { padding: 0 24px; }
+.cr-screen-root      { padding: 40px 24px 80px; }
+.cr-dashboard-root   { padding: 36px 24px 80px; min-height: calc(100vh - 60px); }
+.cr-section          { padding: 80px 24px; }
+.cr-stat-divider     { display: block; }
+.cr-nav-label        { display: inline; }
+.cr-live-text        { display: inline; }
+.cr-back-text        { display: inline; }
+.cr-hero-br          { display: block; }
+.grid-rating-comp    { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+
+/* ── Tablet (≤ 1024px) ────────────────────────────── */
+@media (max-width: 1024px) {
+  .grid-sectors   { grid-template-columns: repeat(2, 1fr); }
+  .grid-companies { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ── Mobile (≤ 768px) ─────────────────────────────── */
 @media (max-width: 768px) {
-  .grid-sectors        { grid-template-columns: 1fr; }
+  .cr-header-inner  { padding: 0 12px; }
+  .cr-screen-root   { padding: 24px 16px 60px; }
+  .cr-dashboard-root { padding: 20px 14px 60px; min-height: calc(100vh - 58px); }
+  .cr-section       { padding: 48px 16px; }
+  .cr-stat-divider  { display: none; }
+  .cr-live-text     { display: none; }
+
+  .grid-sectors        { grid-template-columns: repeat(2, 1fr); }
   .grid-companies      { grid-template-columns: repeat(2, 1fr); }
   .grid-2-col          { grid-template-columns: 1fr; }
   .grid-sectors-landing { grid-template-columns: repeat(2, 1fr); }
-  .grid-favorites      { grid-template-columns: 1fr; }
-  .steps-row           { flex-direction: column; align-items: stretch; }
+  .grid-favorites      { grid-template-columns: repeat(2, 1fr); }
+  .steps-row           { flex-direction: column; align-items: center; gap: 8px; }
   .steps-connector     { display: none; }
   .hero-title          { font-size: 36px !important; letter-spacing: -0.5px !important; }
-  .mapbox-wrap         { height: 300px; }
+  .mapbox-wrap         { height: 280px; }
+  .cr-hero-br          { display: none; }
 }
 
+/* ── Small mobile (≤ 480px) ──────────────────────── */
 @media (max-width: 480px) {
-  .grid-companies        { grid-template-columns: 1fr; }
-  .grid-sectors-landing  { grid-template-columns: 1fr; }
+  .cr-header-inner  { padding: 0 10px; }
+  .cr-screen-root   { padding: 20px 12px 56px; }
+  .cr-dashboard-root { padding: 16px 12px 56px; }
+  .cr-section       { padding: 40px 14px; }
+  .cr-back-text     { display: none; }
+  .cr-nav-label     { display: none; }
+  .grid-rating-comp { grid-template-columns: 1fr; }
+
+  .grid-companies       { grid-template-columns: repeat(2, 1fr); }
+  .grid-sectors         { grid-template-columns: 1fr; }
+  .grid-sectors-landing { grid-template-columns: 1fr; }
+  .grid-favorites       { grid-template-columns: 1fr; }
+  .mapbox-wrap          { height: 240px; }
 }

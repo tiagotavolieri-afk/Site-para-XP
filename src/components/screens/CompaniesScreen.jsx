@@ -101,7 +101,7 @@ function CompanyCard({ company, onSelect }) {
 export function CompaniesScreen({ onSelect, onBackSectors }) {
   const nav = useNavigationContext();
   return (
-    <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '40px 24px 80px' }}>
+    <div className="cr-screen-root" style={{ maxWidth: '1100px', margin: '0 auto' }}>
       <motion.div
         initial={{ opacity: 0, x: -10 }}
         animate={{ opacity: 1, x: 0 }}

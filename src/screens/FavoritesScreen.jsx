@@ -13,7 +13,7 @@ export function FavoritesScreen({ onGoToDashboard }) {
   const favoritedCompanies = AGRO_COMPANIES.filter(c => favorites.includes(c.id));
 
   return (
-    <div style={{ maxWidth: 1100, margin: '0 auto', padding: '40px 24px 80px' }}>
+    <div className="cr-screen-root" style={{ maxWidth: 1100, margin: '0 auto' }}>
       {/* Page header */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}

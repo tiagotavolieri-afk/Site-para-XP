@@ -27,7 +27,7 @@ export function LandingScreen({ onEnter, onGoToDashboard }) {
       }}>
         <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '1px', background: 'rgba(255,255,255,0.04)' }} />
 
-        <div style={{ textAlign: 'center', maxWidth: '900px', padding: '0 24px', position: 'relative', zIndex: 1, width: '100%' }}>
+        <div style={{ textAlign: 'center', maxWidth: '900px', padding: 'clamp(32px, 6vw, 64px) clamp(16px, 4vw, 24px)', position: 'relative', zIndex: 1, width: '100%' }}>
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -36,10 +36,10 @@ export function LandingScreen({ onEnter, onGoToDashboard }) {
             {/* Badge */}
             <span style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
-              marginBottom: '28px',
+              marginBottom: 'clamp(16px, 4vw, 28px)',
               backgroundColor: 'rgba(251,193,2,0.08)',
               border: '1px solid rgba(251,193,2,0.2)',
-              borderRadius: '20px', padding: '5px 16px',
+              borderRadius: '20px', padding: '5px 14px',
               fontSize: '11px', color: '#FBC102', fontWeight: 700,
               letterSpacing: '0.08em', textTransform: 'uppercase',
             }}>
@@ -48,7 +48,7 @@ export function LandingScreen({ onEnter, onGoToDashboard }) {
             </span>
 
             <h1 style={{
-              fontSize: 'clamp(38px, 5.5vw, 62px)', fontWeight: 800,
+              fontSize: 'clamp(32px, 8vw, 62px)', fontWeight: 800,
               color: '#FBC102', marginBottom: '14px',
               letterSpacing: '-0.035em', lineHeight: 1.08, margin: '0 0 14px',
             }}>
@@ -56,21 +56,21 @@ export function LandingScreen({ onEnter, onGoToDashboard }) {
             </h1>
 
             <p style={{
-              fontSize: '17px', color: '#777', lineHeight: 1.7,
-              maxWidth: '490px', margin: '0 auto 52px',
+              fontSize: 'clamp(14px, 3.5vw, 17px)', color: '#777', lineHeight: 1.7,
+              maxWidth: '520px', margin: '0 auto 40px',
             }}>
-              Monitore como fatores climáticos impactam seus investimentos.<br />
-              Escolha por onde começar.
+              Monitore como fatores climáticos impactam seus investimentos.<span className="cr-hero-br"><br /></span>{' '}Escolha por onde começar.
             </p>
 
             {/* ── 3 Module Cards ── */}
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-              gap: 16,
+              gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))',
+              gap: 14,
               maxWidth: 860,
               margin: '0 auto',
               textAlign: 'left',
+              width: '100%',
             }}>
               {/* Card 1: Análise Empresas B3 — DISPONÍVEL */}
               <button
@@ -150,8 +150,8 @@ export function LandingScreen({ onEnter, onGoToDashboard }) {
 
       {/* ── Stats Strip ── */}
       <section style={{ borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)', background: 'rgba(26,26,29,0.8)' }}>
-        <div style={{ maxWidth: '1040px', margin: '0 auto', padding: '22px 24px' }}>
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '48px', flexWrap: 'wrap' }}>
+        <div style={{ maxWidth: '1040px', margin: '0 auto', padding: '22px 16px' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '32px', flexWrap: 'wrap' }}>
             {[
               { value: '3', label: 'Empresas analisadas' },
               { value: '7', label: 'Setores cobertos' },
@@ -159,11 +159,11 @@ export function LandingScreen({ onEnter, onGoToDashboard }) {
             ].map(({ value, label }, i, arr) => (
               <React.Fragment key={label}>
                 <div style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: 32, fontWeight: 800, color: '#FBC102', letterSpacing: '-0.04em', lineHeight: 1 }}>{value}</div>
+                  <div style={{ fontSize: 30, fontWeight: 800, color: '#FBC102', letterSpacing: '-0.04em', lineHeight: 1 }}>{value}</div>
                   <div style={{ fontSize: 10, color: '#555', marginTop: 5, letterSpacing: '0.07em', textTransform: 'uppercase', fontWeight: 600 }}>{label}</div>
                 </div>
                 {i < arr.length - 1 && (
-                  <div style={{ width: 1, height: 36, background: 'rgba(255,255,255,0.07)', flexShrink: 0 }} />
+                  <div className="cr-stat-divider" style={{ width: 1, height: 36, background: 'rgba(255,255,255,0.07)', flexShrink: 0 }} />
                 )}
               </React.Fragment>
             ))}
@@ -172,7 +172,7 @@ export function LandingScreen({ onEnter, onGoToDashboard }) {
       </section>
 
       {/* ── O Problema ── */}
-      <section style={{ padding: '80px 24px', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+      <section className="cr-section" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
         <div style={{ maxWidth: '1040px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '52px' }}>
             <span style={{ display: 'block', fontSize: 10, fontWeight: 700, color: '#FBC102', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 10 }}>Por que importa</span>
@@ -224,7 +224,7 @@ export function LandingScreen({ onEnter, onGoToDashboard }) {
       </section>
 
       {/* ── Como funciona ── */}
-      <section id="como-funciona" style={{ padding: '80px 24px', backgroundColor: 'rgba(31,31,31,0.6)', borderTop: '1px solid rgba(255,255,255,0.04)', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
+      <section id="como-funciona" className="cr-section" style={{ backgroundColor: 'rgba(31,31,31,0.6)', borderTop: '1px solid rgba(255,255,255,0.04)', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
         <div style={{ maxWidth: '1040px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '52px' }}>
             <span style={{ display: 'block', fontSize: 10, fontWeight: 700, color: '#FBC102', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 10 }}>O processo</span>
@@ -267,7 +267,7 @@ export function LandingScreen({ onEnter, onGoToDashboard }) {
       </section>
 
       {/* ── Carteira de Favoritos ── */}
-      <section id="carteira" ref={carteiraRef} style={{ padding: '80px 24px' }}>
+      <section id="carteira" ref={carteiraRef} className="cr-section">
         <div style={{ maxWidth: '1040px', margin: '0 auto' }}>
           <div style={{ marginBottom: '40px' }}>
             <span style={{ display: 'block', fontSize: 10, fontWeight: 700, color: '#FBC102', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 10 }}>Minha carteira</span>
@@ -370,7 +370,7 @@ export function LandingScreen({ onEnter, onGoToDashboard }) {
       </section>
 
       {/* ── Setores cobertos ── */}
-      <section id="setores" style={{ padding: '80px 24px', backgroundColor: 'rgba(31,31,31,0.6)', borderTop: '1px solid rgba(255,255,255,0.04)', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
+      <section id="setores" className="cr-section" style={{ backgroundColor: 'rgba(31,31,31,0.6)', borderTop: '1px solid rgba(255,255,255,0.04)', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
         <div style={{ maxWidth: '1040px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '52px' }}>
             <span style={{ display: 'block', fontSize: 10, fontWeight: 700, color: '#FBC102', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 10 }}>Cobertura</span>
@@ -424,7 +424,7 @@ export function LandingScreen({ onEnter, onGoToDashboard }) {
       </section>
 
       {/* ── CTA Final ── */}
-      <section style={{ padding: '80px 24px' }}>
+      <section className="cr-section">
         <div style={{
           maxWidth: '620px', margin: '0 auto', textAlign: 'center',
           background: '#1F1F1F',
