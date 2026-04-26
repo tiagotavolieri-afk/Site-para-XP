@@ -1,0 +1,1258 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>ClimateRisk Analytics — Documentação do Projeto</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #060608;
+    --surface:  #111113;
+    --card:     #1A1A1C;
+    --card2:    #222226;
+    --border:   rgba(255,255,255,0.08);
+    --yellow:   #FBC102;
+    --yellow-d: rgba(251,193,2,0.12);
+    --yellow-b: rgba(251,193,2,0.25);
+    --teal:     #00C8BB;
+    --teal-d:   rgba(0,200,187,0.10);
+    --teal-b:   rgba(0,200,187,0.22);
+    --t1:       #F0F0F0;
+    --t2:       #B0B0B0;
+    --t3:       #606060;
+    --red:      #ef4444;
+    --orange:   #f97316;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { background: var(--bg); }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--t1);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    line-height: 1.6;
+  }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  /* â”€â”€ Page wrapper â”€â”€ */
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+    padding: 0;
+  }
+  .page:last-child { page-break-after: avoid; }
+
+  /* â”€â”€ Cover â”€â”€ */
+  .cover {
+    background:
+      radial-gradient(ellipse 70% 50% at 15% 10%, rgba(251,193,2,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 55% 45% at 88% 90%, rgba(0,200,187,0.05) 0%, transparent 60%),
+      var(--bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 52px 56px;
+  }
+
+  .cover-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .cover-logo-icon {
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    background: var(--yellow-d);
+    border: 1.5px solid var(--yellow-b);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .cover-logo-icon svg { width: 22px; height: 22px; }
+  .cover-logo-text {
+    font-size: 20px; font-weight: 800;
+    letter-spacing: -0.4px; color: var(--t2);
+  }
+  .cover-logo-text span { color: var(--yellow); }
+
+  .cover-center {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 0 40px;
+  }
+
+  .cover-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--yellow-d);
+    border: 1px solid var(--yellow-b);
+    border-radius: 20px; padding: 5px 16px;
+    font-size: 10px; font-weight: 700;
+    color: var(--yellow); letter-spacing: 0.1em;
+    text-transform: uppercase; margin-bottom: 28px;
+  }
+  .cover-badge-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--yellow); flex-shrink: 0;
+  }
+
+  .cover-title {
+    font-size: 54px; font-weight: 900;
+    letter-spacing: -2px; line-height: 1.05;
+    color: var(--yellow); margin-bottom: 6px;
+  }
+  .cover-title-sub {
+    font-size: 54px; font-weight: 900;
+    letter-spacing: -2px; line-height: 1.05;
+    color: var(--t1); margin-bottom: 28px;
+  }
+  .cover-desc {
+    font-size: 16px; color: var(--t3); max-width: 480px;
+    line-height: 1.7; margin-bottom: 52px;
+  }
+
+  .cover-stats {
+    display: flex; gap: 40px;
+    border-top: 1px solid var(--border);
+    padding-top: 28px;
+  }
+  .cover-stat-val {
+    font-size: 32px; font-weight: 800;
+    color: var(--yellow); letter-spacing: -1px; line-height: 1;
+    margin-bottom: 4px;
+  }
+  .cover-stat-label {
+    font-size: 10px; font-weight: 600;
+    color: var(--t3); letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .cover-stat-sep {
+    width: 1px; background: var(--border); align-self: stretch;
+  }
+
+  .cover-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+  .cover-footer-label {
+    font-size: 11px; color: var(--t3);
+  }
+  .cover-footer-for {
+    font-size: 11px; color: var(--t3);
+    text-align: right;
+  }
+  .cover-footer-for strong { color: var(--t2); font-weight: 600; }
+
+  /* â”€â”€ Content pages â”€â”€ */
+  .content-page {
+    padding: 44px 52px;
+    background:
+      radial-gradient(ellipse 50% 30% at 95% 5%, rgba(251,193,2,0.03) 0%, transparent 60%),
+      var(--bg);
+  }
+
+  .page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+    margin-bottom: 36px;
+  }
+  .page-header-logo {
+    font-size: 12px; font-weight: 800;
+    color: var(--t3); letter-spacing: -0.2px;
+  }
+  .page-header-logo span { color: var(--yellow); }
+  .page-header-section {
+    font-size: 10px; font-weight: 600;
+    color: var(--t3); letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .page-number {
+    font-size: 10px; color: var(--t3); font-weight: 500;
+  }
+
+  .section-eyebrow {
+    font-size: 10px; font-weight: 700;
+    color: var(--yellow); letter-spacing: 0.12em;
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .section-title {
+    font-size: 28px; font-weight: 800;
+    letter-spacing: -0.8px; color: var(--t1);
+    margin-bottom: 8px; line-height: 1.15;
+  }
+  .section-sub {
+    font-size: 14px; color: var(--t3);
+    margin-bottom: 32px; line-height: 1.6;
+    max-width: 540px;
+  }
+
+  /* â”€â”€ Cards â”€â”€ */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 24px;
+  }
+  .card-yellow {
+    background: var(--yellow-d);
+    border: 1px solid var(--yellow-b);
+    border-radius: 12px;
+    padding: 22px 24px;
+  }
+  .card-teal {
+    background: var(--teal-d);
+    border: 1px solid var(--teal-b);
+    border-radius: 12px;
+    padding: 22px 24px;
+  }
+
+  /* â”€â”€ Grid â”€â”€ */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px; }
+
+  /* â”€â”€ Tag / Badge â”€â”€ */
+  .tag {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 3px 10px; border-radius: 20px;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .tag-yellow { background: var(--yellow-d); color: var(--yellow); border: 1px solid var(--yellow-b); }
+  .tag-teal   { background: var(--teal-d);   color: var(--teal);   border: 1px solid var(--teal-b); }
+  .tag-red    { background: rgba(239,68,68,0.1); color: var(--red); border: 1px solid rgba(239,68,68,0.25); }
+  .tag-orange { background: rgba(249,115,22,0.1); color: var(--orange); border: 1px solid rgba(249,115,22,0.25); }
+  .tag-gray   { background: rgba(255,255,255,0.04); color: var(--t3); border: 1px solid var(--border); }
+
+  /* â”€â”€ Text helpers â”€â”€ */
+  h3.card-title { font-size: 15px; font-weight: 700; color: var(--t1); margin-bottom: 8px; }
+  h4.card-title { font-size: 13px; font-weight: 700; color: var(--t1); margin-bottom: 6px; }
+  p.card-body   { font-size: 12px; color: var(--t2); line-height: 1.65; }
+  p.small       { font-size: 11px; color: var(--t3); line-height: 1.5; }
+
+  .icon-wrap {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-bottom: 14px;
+  }
+  .icon-wrap-sm {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* â”€â”€ Steps â”€â”€ */
+  .steps {
+    display: flex; align-items: center; gap: 0;
+    flex-wrap: nowrap; overflow: hidden;
+  }
+  .step-box {
+    flex: 1;
+    background: var(--card);
+    border: 1px solid var(--yellow-b);
+    border-radius: 10px;
+    padding: 16px 12px;
+    text-align: center;
+  }
+  .step-num {
+    font-size: 9px; font-weight: 700;
+    color: var(--yellow); letter-spacing: 1.5px;
+    text-transform: uppercase; margin-bottom: 5px;
+  }
+  .step-label {
+    font-size: 11px; font-weight: 600;
+    color: var(--t2); line-height: 1.3;
+  }
+  .step-arrow {
+    width: 22px; height: 1px;
+    background: rgba(251,193,2,0.3);
+    flex-shrink: 0;
+  }
+
+  /* â”€â”€ Table â”€â”€ */
+  table { width: 100%; border-collapse: collapse; }
+  thead th {
+    font-size: 10px; font-weight: 700;
+    color: var(--t3); letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 8px 12px; text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  tbody td {
+    font-size: 12px; color: var(--t2);
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* â”€â”€ Progress bar â”€â”€ */
+  .progress-wrap {
+    background: rgba(255,255,255,0.06);
+    border-radius: 4px; height: 5px; overflow: hidden;
+    margin-top: 8px;
+  }
+  .progress-fill {
+    height: 100%; border-radius: 4px;
+    background: var(--yellow);
+  }
+
+  /* â”€â”€ Divider â”€â”€ */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+
+  /* â”€â”€ Source row â”€â”€ */
+  .source-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 16px; background: var(--card);
+    border: 1px solid var(--border); border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  .source-row:last-child { margin-bottom: 0; }
+  .source-num {
+    width: 28px; height: 28px; border-radius: 7px;
+    background: var(--yellow-d); border: 1px solid var(--yellow-b);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 800; color: var(--yellow);
+    flex-shrink: 0;
+  }
+
+  /* â”€â”€ Alert rows â”€â”€ */
+  .alert-row {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 14px 16px; border-radius: 10px;
+    margin-bottom: 8px;
+  }
+  .alert-high   { background: rgba(239,68,68,0.07); border: 1px solid rgba(239,68,68,0.2); }
+  .alert-medium { background: rgba(249,115,22,0.07); border: 1px solid rgba(249,115,22,0.2); }
+  .alert-info   { background: rgba(0,200,187,0.07); border: 1px solid rgba(0,200,187,0.2); }
+
+  .alert-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    flex-shrink: 0; margin-top: 4px;
+  }
+
+  /* â”€â”€ Rating badge â”€â”€ */
+  .rating-badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 56px; height: 56px; border-radius: 14px;
+    font-size: 24px; font-weight: 900;
+    background: rgba(249,115,22,0.15);
+    border: 2px solid rgba(249,115,22,0.4);
+    color: var(--orange);
+  }
+
+  /* â”€â”€ Sector grid â”€â”€ */
+  .sector-chip {
+    padding: 14px 16px; border-radius: 10px;
+    text-align: center;
+  }
+  .sector-chip-on  { background: var(--yellow-d); border: 1px solid var(--yellow-b); }
+  .sector-chip-off { background: var(--card); border: 1px solid var(--border); opacity: 0.5; }
+  .sector-emoji { font-size: 20px; margin-bottom: 6px; }
+  .sector-name { font-size: 11px; font-weight: 600; margin-bottom: 4px; }
+  .sector-status { font-size: 9px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+
+  /* â”€â”€ Tech stack â”€â”€ */
+  .tech-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px; border-radius: 8px;
+    background: var(--card2); border: 1px solid var(--border);
+    font-size: 11px; font-weight: 600; color: var(--t2);
+    margin: 4px;
+  }
+  .tech-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+  /* â”€â”€ Roadmap â”€â”€ */
+  .road-item {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 16px; background: var(--card);
+    border: 1px solid var(--border); border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  .road-item:last-child { margin-bottom: 0; }
+  .road-phase {
+    flex-shrink: 0; padding: 4px 10px;
+    border-radius: 6px; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .road-now   { background: var(--yellow-d); color: var(--yellow); border: 1px solid var(--yellow-b); }
+  .road-next  { background: var(--teal-d);   color: var(--teal);   border: 1px solid var(--teal-b); }
+  .road-later { background: rgba(255,255,255,0.04); color: var(--t3); border: 1px solid var(--border); }
+
+  @media print {
+    body { background: var(--bg) !important; }
+    .page { page-break-after: always; }
+  }
+</style>
+</head>
+<body>
+
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- PAGE 1 — COVER -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<div class="page cover">
+
+  <!-- Top logo -->
+  <div class="cover-logo">
+    <div class="cover-logo-icon">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 17L9 11L13 15L21 7" stroke="#FBC102" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M14 7H21V14" stroke="#FBC102" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="cover-logo-text">Climate<span>Risk</span></div>
+  </div>
+
+  <!-- Center content -->
+  <div class="cover-center">
+    <div class="cover-badge">
+      <span class="cover-badge-dot"></span>
+      Documentação do Produto · Protótipo v1.0
+    </div>
+    <div class="cover-title">ClimateRisk</div>
+    <div class="cover-title-sub">Analytics</div>
+    <p class="cover-desc">
+      Plataforma de análise de risco climático para empresas listadas na B3.<br>
+      Inteligência climática integrada às teses de investimento.
+    </p>
+
+    <!-- Stats strip -->
+    <div class="cover-stats">
+      <div>
+        <div class="cover-stat-val">4</div>
+        <div class="cover-stat-label">Fontes de dados</div>
+      </div>
+      <div class="cover-stat-sep"></div>
+      <div>
+        <div class="cover-stat-val">7</div>
+        <div class="cover-stat-label">Setores mapeados</div>
+      </div>
+      <div class="cover-stat-sep"></div>
+      <div>
+        <div class="cover-stat-val">27</div>
+        <div class="cover-stat-label">Estados analisados</div>
+      </div>
+      <div class="cover-stat-sep"></div>
+      <div>
+        <div class="cover-stat-val">5</div>
+        <div class="cover-stat-label">Camadas de análise</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="cover-footer">
+    <div class="cover-footer-label">Abril · 2026</div>
+    <div class="cover-footer-for">
+      Desenvolvido para <strong>XP Investimentos</strong>
+    </div>
+  </div>
+</div>
+
+
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- PAGE 2 — VISÃO GERAL -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<div class="page content-page">
+  <div class="page-header">
+    <div class="page-header-logo">Climate<span>Risk</span> Analytics</div>
+    <div class="page-header-section">Visão Geral</div>
+    <div class="page-number">02</div>
+  </div>
+
+  <div class="section-eyebrow">O Produto</div>
+  <div class="section-title">O que é o ClimateRisk Analytics</div>
+  <p class="section-sub">Uma plataforma que traduz dados climáticos em risco financeiro concreto, empresa por empresa, em tempo real.</p>
+
+  <!-- Mission card -->
+  <div class="card-yellow" style="margin-bottom:20px;">
+    <p style="font-size:15px; font-weight:600; color:var(--yellow); line-height:1.6; margin-bottom:8px;">
+      "O mercado financeiro ainda não tem visibilidade clara do risco climático por empresa."
+    </p>
+    <p style="font-size:12px; color:rgba(251,193,2,0.65); line-height:1.65;">
+      ClimateRisk Analytics resolve esse problema conectando dados de clima ao impacto financeiro esperado,
+      entregando um rating acionável para analistas, gestores e investidores.
+    </p>
+  </div>
+
+  <!-- 3 pillars -->
+  <div class="grid-3" style="margin-bottom:22px;">
+    <div class="card">
+      <div class="icon-wrap" style="background:var(--yellow-d); border:1px solid var(--yellow-b);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="#FBC102" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h4 class="card-title">Tempo Real</h4>
+      <p class="card-body">Dados climáticos e macroeconômicos atualizados automaticamente via APIs externas.</p>
+    </div>
+    <div class="card">
+      <div class="icon-wrap" style="background:var(--teal-d); border:1px solid var(--teal-b);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" stroke="#00C8BB" stroke-width="2"/>
+          <path d="M12 8v4l3 3" stroke="#00C8BB" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h4 class="card-title">Rating Acionável</h4>
+      <p class="card-body">Escala A"D com composição detalhada por dimensão. Não apenas um número — uma tese.</p>
+    </div>
+    <div class="card">
+      <div class="icon-wrap" style="background:rgba(249,115,22,0.1); border:1px solid rgba(249,115,22,0.25);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="#f97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h4 class="card-title">Por Empresa</h4>
+      <p class="card-body">Análise granular por empresa, setor e região geográfica de atuação.</p>
+    </div>
+  </div>
+
+  <!-- Público-alvo -->
+  <div class="section-eyebrow" style="margin-top:12px;">Público-alvo</div>
+  <div class="grid-2">
+    <div class="card">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+        <div class="icon-wrap-sm" style="background:var(--yellow-d); border:1px solid var(--yellow-b);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="#FBC102" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="12" cy="7" r="4" stroke="#FBC102" stroke-width="2"/>
+          </svg>
+        </div>
+        <h4 class="card-title" style="margin:0;">Analistas de Risco</h4>
+      </div>
+      <p class="card-body">Profissionais que precisam incorporar variáveis climáticas em modelos de valuation e relatórios setoriais.</p>
+    </div>
+    <div class="card">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+        <div class="icon-wrap-sm" style="background:var(--teal-d); border:1px solid var(--teal-b);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+            <rect x="2" y="3" width="20" height="14" rx="2" stroke="#00C8BB" stroke-width="2"/>
+            <path d="M8 21h8M12 17v4" stroke="#00C8BB" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h4 class="card-title" style="margin:0;">Gestores de Portfólio</h4>
+      </div>
+      <p class="card-body">Gestores que desejam monitorar exposição climática agregada da carteira e receber alertas acionáveis.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- PAGE 3 — O PROBLEMA + COMO FUNCIONA -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<div class="page content-page">
+  <div class="page-header">
+    <div class="page-header-logo">Climate<span>Risk</span> Analytics</div>
+    <div class="page-header-section">Problema & Solução</div>
+    <div class="page-number">03</div>
+  </div>
+
+  <div class="section-eyebrow">Por que existe</div>
+  <div class="section-title">O Problema</div>
+  <p class="section-sub">Três lacunas críticas tornam o risco climático invisível nos modelos de precificação.</p>
+
+  <div class="grid-3" style="margin-bottom:36px;">
+    <div class="card">
+      <div class="icon-wrap" style="background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.25);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M2 20h20M6 20V10M12 20V4M18 20v-6" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h4 class="card-title">Informação dispersa</h4>
+      <p class="card-body">Dados climáticos e financeiros existem, mas estão separados em fontes distintas, sem cruzamento analítico.</p>
+    </div>
+    <div class="card">
+      <div class="icon-wrap" style="background:rgba(249,115,22,0.1); border:1px solid rgba(249,115,22,0.25);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" stroke="#f97316" stroke-width="2"/>
+          <path d="M12 6v6l4 2" stroke="#f97316" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h4 class="card-title">Time enxuto</h4>
+      <p class="card-body">Analistas não têm tempo para monitorar variáveis climáticas de cada empresa no portfólio.</p>
+    </div>
+    <div class="card">
+      <div class="icon-wrap" style="background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.25);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 9v4M12 17h.01" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h4 class="card-title">Risco invisível</h4>
+      <p class="card-body">Sem síntese clara, o risco climático fica fora dos modelos de precificação e das teses de investimento.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section-eyebrow">O processo</div>
+  <div class="section-title">Como funciona</div>
+  <p class="section-sub" style="margin-bottom:24px;">5 camadas de análise, do setor ao alerta acionável.</p>
+
+  <div class="steps" style="margin-bottom:28px;">
+    <div class="step-box">
+      <div class="step-num">01</div>
+      <div class="step-label">Setor</div>
+    </div>
+    <div class="step-arrow"></div>
+    <div class="step-box">
+      <div class="step-num">02</div>
+      <div class="step-label">Empresa</div>
+    </div>
+    <div class="step-arrow"></div>
+    <div class="step-box">
+      <div class="step-num">03</div>
+      <div class="step-label">Exposição Geográfica</div>
+    </div>
+    <div class="step-arrow"></div>
+    <div class="step-box">
+      <div class="step-num">04</div>
+      <div class="step-label">Risco Climático</div>
+    </div>
+    <div class="step-arrow"></div>
+    <div class="step-box">
+      <div class="step-num">05</div>
+      <div class="step-label">Alerta Acionável</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card-teal">
+      <h4 class="card-title" style="color:var(--teal);">Entrada — Dados brutos</h4>
+      <p class="card-body">Índice ONI (NOAA) · Previsão climática (Open-Meteo) · Notícias financeiras (GNews) · Cotação B3 (BRAPI)</p>
+    </div>
+    <div class="card-yellow">
+      <h4 class="card-title" style="color:var(--yellow);">Saída — Inteligência</h4>
+      <p class="card-body">Rating climático A"D · Alertas por horizonte · Impacto financeiro quantificado · Mapa de risco regional</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- PAGE 4 — FONTES DE DADOS -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<div class="page content-page">
+  <div class="page-header">
+    <div class="page-header-logo">Climate<span>Risk</span> Analytics</div>
+    <div class="page-header-section">Fontes de Dados</div>
+    <div class="page-number">04</div>
+  </div>
+
+  <div class="section-eyebrow">Infraestrutura de dados</div>
+  <div class="section-title">Fontes de Dados em Tempo Real</div>
+  <p class="section-sub">4 APIs externas alimentam a plataforma com dados climáticos, financeiros e jornalísticos.</p>
+
+  <!-- Source 1: NOAA -->
+  <div class="source-row">
+    <div class="source-num">1</div>
+    <div style="flex:1;">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px; flex-wrap:wrap;">
+        <h3 class="card-title" style="margin:0;">NOAA — National Oceanic and Atmospheric Administration</h3>
+        <span class="tag tag-red">Clima Global</span>
+      </div>
+      <p class="card-body" style="margin-bottom:8px;">
+        Fornece o <strong style="color:var(--t1);">Índice ONI (Oceanic Niño Index)</strong> — a métrica oficial para detecção de El Niño e La Niña.
+        A plataforma consome o arquivo <code style="background:var(--card2); padding:1px 6px; border-radius:4px; font-size:11px; color:var(--yellow);">oni.ascii.txt</code> diretamente do servidor da NOAA e atualiza o painel a cada 5 minutos.
+      </p>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <span class="tag tag-gray">cpc.ncep.noaa.gov</span>
+        <span class="tag tag-yellow">Atualização: 5 min</span>
+        <span class="tag tag-gray">Formato: ASCII tabular</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Source 2: Open-Meteo -->
+  <div class="source-row">
+    <div class="source-num">2</div>
+    <div style="flex:1;">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px; flex-wrap:wrap;">
+        <h3 class="card-title" style="margin:0;">Open-Meteo — Previsão Meteorológica</h3>
+        <span class="tag tag-teal">Clima Regional</span>
+      </div>
+      <p class="card-body" style="margin-bottom:8px;">
+        API gratuita de previsão meteorológica. Para cada um dos <strong style="color:var(--t1);">11 estados agrícolas monitorados</strong>
+        (MT, GO, MS, BA, PI, MA, TO, SP, PR, RS, SC), a plataforma consulta precipitação acumulada e temperatura máxima para os próximos 7"16 dias.
+        Com esses dados, calcula o nível de risco climático regional (Alto / Médio / Baixo) em tempo real.
+      </p>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <span class="tag tag-gray">api.open-meteo.com</span>
+        <span class="tag tag-teal">11 estados · 16 dias</span>
+        <span class="tag tag-gray">Variáveis: precip. + temp. máx.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Source 3: GNews -->
+  <div class="source-row">
+    <div class="source-num">3</div>
+    <div style="flex:1;">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px; flex-wrap:wrap;">
+        <h3 class="card-title" style="margin:0;">GNews API — Notícias Financeiras</h3>
+        <span class="tag tag-orange">Mídia & Mercado</span>
+      </div>
+      <p class="card-body" style="margin-bottom:8px;">
+        Busca notícias em português sobre empresas cobertas e eventos climáticos relevantes.
+        A plataforma consulta por ticker (ex: <code style="background:var(--card2); padding:1px 6px; border-radius:4px; font-size:11px; color:var(--yellow);">"Boa Safra" OR "SOJA3"</code>)
+        e por termos climáticos (<code style="background:var(--card2); padding:1px 6px; border-radius:4px; font-size:11px; color:var(--yellow);">"clima agronegócio seca safra Brasil"</code>), exibindo as 3 notícias mais recentes com categorização de impacto.
+      </p>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <span class="tag tag-gray">gnews.io</span>
+        <span class="tag tag-yellow">Idioma: pt-BR</span>
+        <span class="tag tag-gray">Fallback: dados curados</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Source 4: BRAPI -->
+  <div class="source-row">
+    <div class="source-num">4</div>
+    <div style="flex:1;">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px; flex-wrap:wrap;">
+        <h3 class="card-title" style="margin:0;">BRAPI — Cotações B3</h3>
+        <span class="tag tag-teal">Mercado Financeiro</span>
+      </div>
+      <p class="card-body" style="margin-bottom:8px;">
+        API brasileira que fornece cotações em tempo real de ações da B3.
+        Para cada empresa analisada, busca preço atual, variação do dia e variação percentual do ticker correspondente.
+        Exibido no painel de perfil da empresa junto ao rating climático.
+      </p>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <span class="tag tag-gray">brapi.dev</span>
+        <span class="tag tag-teal">Tempo real · B3</span>
+        <span class="tag tag-gray">Timeout: 5s com fallback</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logic box -->
+  <div class="card" style="margin-top:18px; background:var(--card2);">
+    <p class="small" style="color:var(--t2);">
+      <strong style="color:var(--yellow);">Resiliência:</strong> Todas as APIs operam com fallback automático. Se uma chamada falhar (timeout, quota, rede),
+      a plataforma carrega dados curados offline sem interromper a experiência do usuário.
+      O índice ONI atualiza a cada 5 minutos via <code style="font-size:11px; color:var(--teal);">setInterval</code>.
+    </p>
+  </div>
+</div>
+
+
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- PAGE 5 — FUNCIONALIDADES / TELAS -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<div class="page content-page">
+  <div class="page-header">
+    <div class="page-header-logo">Climate<span>Risk</span> Analytics</div>
+    <div class="page-header-section">Funcionalidades</div>
+    <div class="page-number">05</div>
+  </div>
+
+  <div class="section-eyebrow">Arquitetura de telas</div>
+  <div class="section-title">Funcionalidades da Plataforma</div>
+  <p class="section-sub">5 telas com navegação fluida entre Landing, Setores, Empresas, Dashboard e Carteira.</p>
+
+  <!-- Screen 1 -->
+  <div style="margin-bottom:14px;">
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+      <span class="tag tag-yellow" style="font-size:9px;">TELA 01</span>
+      <h3 class="card-title" style="margin:0; font-size:14px;">Landing Page — Ponto de entrada</h3>
+    </div>
+    <div class="grid-3">
+      <div class="card" style="padding:14px 16px;">
+        <p class="small"><strong style="color:var(--t1); display:block; margin-bottom:3px;">Hero + CTA</strong>Apresentação da plataforma com 3 módulos de entrada: Análise B3, Minha Carteira e Em Breve.</p>
+      </div>
+      <div class="card" style="padding:14px 16px;">
+        <p class="small"><strong style="color:var(--t1); display:block; margin-bottom:3px;">O Problema</strong>Seção educacional explicando por que risco climático é invisível no mercado atual.</p>
+      </div>
+      <div class="card" style="padding:14px 16px;">
+        <p class="small"><strong style="color:var(--t1); display:block; margin-bottom:3px;">Setores + Carteira</strong>Visão dos setores cobertos e acesso rápido à carteira de favoritos do usuário.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Screen 2 -->
+  <div style="margin-bottom:14px;">
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+      <span class="tag tag-teal" style="font-size:9px;">TELA 02</span>
+      <h3 class="card-title" style="margin:0; font-size:14px;">Setores — Seleção de Setor</h3>
+    </div>
+    <div class="card" style="padding:14px 16px;">
+      <p class="small">Grid de 7 setores (Agronegócio disponível; Energia, Saneamento, Mineração, Seguros, Papel&Celulose e Logística como expansão futura). Cada card exibe ícone, descrição e badge de status com animação de pulso para setores ativos.</p>
+    </div>
+  </div>
+
+  <!-- Screen 3 -->
+  <div style="margin-bottom:14px;">
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+      <span class="tag tag-yellow" style="font-size:9px;">TELA 03</span>
+      <h3 class="card-title" style="margin:0; font-size:14px;">Empresas — Seleção de Empresa</h3>
+    </div>
+    <div class="card" style="padding:14px 16px;">
+      <p class="small">Grid com 8 empresas do agronegócio (SOJA3, SLCE3, AGRO3, SMTO3, JALL3, JBSS3, BEEF3, MRFG3). Boa Safra Sementes (SOJA3) é a única com análise completa disponível. Usuário pode favoritar empresas para a carteira pessoal.</p>
+    </div>
+  </div>
+
+  <!-- Screen 4: Dashboard — main content -->
+  <div style="margin-bottom:14px;">
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+      <span class="tag tag-red" style="font-size:9px;">TELA 04</span>
+      <h3 class="card-title" style="margin:0; font-size:14px;">Dashboard — Análise Completa da Empresa</h3>
+    </div>
+    <div class="grid-2">
+      <div>
+        <div class="card" style="padding:14px 16px; margin-bottom:10px;">
+          <p class="small"><strong style="color:var(--yellow); display:block; margin-bottom:3px;">Rating Panel (ao vivo)</strong>
+          Nota climática atual com ONI em tempo real, tendência, principal risco, horizonte crítico e regiões críticas com tags geográficas.</p>
+        </div>
+        <div class="card" style="padding:14px 16px; margin-bottom:10px;">
+          <p class="small"><strong style="color:var(--teal); display:block; margin-bottom:3px;">Mapa do Brasil (ao vivo)</strong>
+          Mapa SVG interativo com risk score por estado. Alterna entre 3 horizontes: 7 dias (Open-Meteo), 12 meses e 5 anos (baseado no ONI).</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <p class="small"><strong style="color:var(--orange); display:block; margin-bottom:3px;">Alertas Acionáveis</strong>
+          3 alertas categorizados por severidade (Alto/Médio/Info) e horizonte temporal (Curto/Médio/Longo Prazo).</p>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="padding:14px 16px; margin-bottom:10px;">
+          <p class="small"><strong style="color:var(--t1); display:block; margin-bottom:3px;">Impacto Financeiro</strong>
+          Tabela com 4 cenários de impacto: receita, capital de giro, inadimplência e volume vendido — com probabilidade e barra visual.</p>
+        </div>
+        <div class="card" style="padding:14px 16px; margin-bottom:10px;">
+          <p class="small"><strong style="color:var(--t1); display:block; margin-bottom:3px;">Notícias Corporativas</strong>
+          Feed de notícias classificadas por tipo de impacto (negativo/positivo/neutro), com links para fontes externas.</p>
+        </div>
+        <div class="card" style="padding:14px 16px;">
+          <p class="small"><strong style="color:var(--t1); display:block; margin-bottom:3px;">Perfil da Empresa</strong>
+          Descrição do modelo de negócio, exposição climática específica e estatísticas (ticker, mercado, rating, última revisão).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Screen 5 -->
+  <div>
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+      <span class="tag tag-teal" style="font-size:9px;">TELA 05</span>
+      <h3 class="card-title" style="margin:0; font-size:14px;">Minha Carteira — Portfólio Pessoal</h3>
+    </div>
+    <div class="card" style="padding:14px 16px;">
+      <p class="small">Tela de gestão da carteira pessoal. Exibe todas as empresas favoritadas com rating climático. Permite remover empresa da carteira ou acessar diretamente o dashboard. Persistência via Context API (localStorage-ready).</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- PAGE 6 — METODOLOGIA DE RATING -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<div class="page content-page">
+  <div class="page-header">
+    <div class="page-header-logo">Climate<span>Risk</span> Analytics</div>
+    <div class="page-header-section">Metodologia de Rating</div>
+    <div class="page-number">06</div>
+  </div>
+
+  <div class="section-eyebrow">Metodologia</div>
+  <div class="section-title">Sistema de Rating Climático</div>
+  <p class="section-sub">O rating climático sintetiza 4 dimensões em uma nota de A (Baixo risco) a E (Risco extremo).</p>
+
+  <!-- Rating scale -->
+  <div style="margin-bottom:22px;">
+    <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:8px;">
+      <div style="background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.3); border-radius:10px; padding:12px 10px; text-align:center;">
+        <div style="font-size:26px; font-weight:900; color:#22c55e; margin-bottom:3px;">A</div>
+        <div style="font-size:10px; font-weight:700; color:rgba(34,197,94,0.8);">Baixo Risco</div>
+        <div style="font-size:9px; color:var(--t3); margin-top:3px; line-height:1.4;">Exposição mínima, alta capacidade adaptativa</div>
+      </div>
+      <div style="background:rgba(234,179,8,0.1); border:1px solid rgba(234,179,8,0.3); border-radius:10px; padding:12px 10px; text-align:center;">
+        <div style="font-size:26px; font-weight:900; color:#eab308; margin-bottom:3px;">B</div>
+        <div style="font-size:10px; font-weight:700; color:rgba(234,179,8,0.8);">Risco Moderado</div>
+        <div style="font-size:9px; color:var(--t3); margin-top:3px; line-height:1.4;">Exposição controlada com mitigações parciais</div>
+      </div>
+      <div style="background:rgba(249,115,22,0.1); border:1px solid rgba(249,115,22,0.3); border-radius:10px; padding:12px 10px; text-align:center;">
+        <div style="font-size:26px; font-weight:900; color:#f97316; margin-bottom:3px;">C</div>
+        <div style="font-size:10px; font-weight:700; color:rgba(249,115,22,0.8);">Mod.-Alto</div>
+        <div style="font-size:9px; color:var(--t3); margin-top:3px; line-height:1.4;">Exposição relevante, riscos se materializando</div>
+      </div>
+      <div style="background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.3); border-radius:10px; padding:12px 10px; text-align:center;">
+        <div style="font-size:26px; font-weight:900; color:#ef4444; margin-bottom:3px;">D</div>
+        <div style="font-size:10px; font-weight:700; color:rgba(239,68,68,0.8);">Risco Crítico</div>
+        <div style="font-size:9px; color:var(--t3); margin-top:3px; line-height:1.4;">Impacto severo esperado, baixa resiliência</div>
+      </div>
+      <div style="background:rgba(139,0,0,0.12); border:1px solid rgba(139,0,0,0.35); border-radius:10px; padding:12px 10px; text-align:center;">
+        <div style="font-size:26px; font-weight:900; color:#b91c1c; margin-bottom:3px;">E</div>
+        <div style="font-size:10px; font-weight:700; color:rgba(185,28,28,0.9);">Risco Extremo</div>
+        <div style="font-size:9px; color:var(--t3); margin-top:3px; line-height:1.4;">Impacto catastrófico, sem resiliência climática</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 Dimensions -->
+  <div class="section-eyebrow">As 4 dimensões</div>
+  <div style="margin-bottom:28px;">
+    <table>
+      <thead>
+        <tr>
+          <th>Dimensão</th>
+          <th>Peso</th>
+          <th>O que avalia</th>
+          <th style="text-align:right;">Ex. Boa Safra</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:var(--t1);">Exposição Geográfica</strong></td>
+          <td><span class="tag tag-yellow" style="font-size:10px;">30%</span></td>
+          <td>Concentração de receitas em regiões climaticamente vulneráveis (MT, MATOPIBA etc.)</td>
+          <td style="text-align:right;"><span class="tag tag-red">Alta · Eleva risco</span></td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--t1);">Severidade Climática</strong></td>
+          <td><span class="tag tag-yellow" style="font-size:10px;">30%</span></td>
+          <td>Intensidade e frequência dos eventos climáticos projetados nas regiões de atuação</td>
+          <td style="text-align:right;"><span class="tag tag-red">Média-Alta · Eleva</span></td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--t1);">Sensibilidade Operacional</strong></td>
+          <td><span class="tag tag-yellow" style="font-size:10px;">25%</span></td>
+          <td>Grau de dependência do modelo de negócio às condições climáticas (ciclo agrícola, insumos)</td>
+          <td style="text-align:right;"><span class="tag tag-red">Alta · Eleva risco</span></td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--t1);">Capacidade de Adaptação</strong></td>
+          <td><span class="tag tag-teal" style="font-size:10px;">15%</span></td>
+          <td>Capacidade financeira, tecnológica e estratégica de mitigar impactos climáticos</td>
+          <td style="text-align:right;"><span class="tag tag-orange">Média · Reduz parcial.</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ONI Integration -->
+  <hr class="divider">
+  <div class="section-eyebrow">Lógica ONI</div>
+  <div style="margin-bottom:16px;">
+    <h3 class="card-title" style="font-size:14px; margin-bottom:12px;">Ajuste dinâmico baseado no Índice ONI</h3>
+    <div class="grid-3">
+      <div class="alert-row alert-high" style="margin-bottom:0; flex-direction:column; gap:6px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="alert-dot" style="background:#ef4444;"></span>
+          <strong style="font-size:12px; color:#ef4444;">La Niña (≤ -0.5)</strong>
+        </div>
+        <p class="small" style="padding-left:16px;">Eleva risco em Centro-Oeste (MT, GO, MS) e MATOPIBA. Forte (≤ -1.0): Nordeste também elevado.</p>
+      </div>
+      <div class="alert-row alert-medium" style="margin-bottom:0; flex-direction:column; gap:6px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="alert-dot" style="background:#f97316;"></span>
+          <strong style="font-size:12px; color:#f97316;">El Niño (≥ +0.5)</strong>
+        </div>
+        <p class="small" style="padding-left:16px;">Eleva risco no Sul (PR, RS, SC). Seca no Nordeste. Centro-Oeste com risco médio.</p>
+      </div>
+      <div class="alert-row alert-info" style="margin-bottom:0; flex-direction:column; gap:6px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="alert-dot" style="background:#00C8BB;"></span>
+          <strong style="font-size:12px; color:#00C8BB;">Neutro</strong>
+        </div>
+        <p class="small" style="padding-left:16px;">MT e GO permanecem em risco médio (vulnerabilidade estrutural). Demais estados em baixo.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Case study -->
+  <div class="card-yellow" style="margin-top:4px;">
+    <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+      <div class="rating-badge">C</div>
+      <div style="flex:1;">
+        <h4 class="card-title" style="color:var(--yellow); margin-bottom:4px;">Caso: Boa Safra Sementes (SOJA3)</h4>
+        <p class="small" style="color:rgba(251,193,2,0.65);">
+          Rating atual <strong style="color:var(--yellow);">C — Moderado-Alto</strong>, tendência de piora nos últimos 6 meses.
+          Regiões críticas: MT, GO, MS, BA, PI. Horizonte crítico: 3"12 meses.
+          Dupla exposição: produção própria + inadimplência de clientes em anos de quebra de safra.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- PAGE 7 — COBERTURA + TECH STACK + ROADMAP -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<div class="page content-page">
+  <div class="page-header">
+    <div class="page-header-logo">Climate<span>Risk</span> Analytics</div>
+    <div class="page-header-section">Cobertura · Stack · Roadmap</div>
+    <div class="page-number">07</div>
+  </div>
+
+  <div class="section-eyebrow">Cobertura atual</div>
+  <div class="section-title">Setores & Empresas</div>
+  <p class="section-sub" style="margin-bottom:20px;">1 setor disponível com análise completa. 6 setores em expansão planejada.</p>
+
+  <!-- Sector grid -->
+  <div style="display:grid; grid-template-columns:repeat(7,1fr); gap:8px; margin-bottom:24px;">
+    <div class="sector-chip sector-chip-on">
+      <div class="sector-emoji">&#127793;</div>
+      <div class="sector-name" style="color:var(--yellow);">Agroneg.</div>
+      <div class="sector-status" style="color:var(--teal);">Disponível</div>
+    </div>
+    <div class="sector-chip sector-chip-off">
+      <div class="sector-emoji">&#9889;</div>
+      <div class="sector-name" style="color:var(--t3);">Energia</div>
+      <div class="sector-status" style="color:var(--t3);">Futuro</div>
+    </div>
+    <div class="sector-chip sector-chip-off">
+      <div class="sector-emoji">&#128167;</div>
+      <div class="sector-name" style="color:var(--t3);">Saneam.</div>
+      <div class="sector-status" style="color:var(--t3);">Futuro</div>
+    </div>
+    <div class="sector-chip sector-chip-off">
+      <div class="sector-emoji">&#9935;&#65039;</div>
+      <div class="sector-name" style="color:var(--t3);">Mineração</div>
+      <div class="sector-status" style="color:var(--t3);">Futuro</div>
+    </div>
+    <div class="sector-chip sector-chip-off">
+      <div class="sector-emoji">&#128737;&#65039;</div>
+      <div class="sector-name" style="color:var(--t3);">Seguros</div>
+      <div class="sector-status" style="color:var(--t3);">Futuro</div>
+    </div>
+    <div class="sector-chip sector-chip-off">
+      <div class="sector-emoji">&#127794;</div>
+      <div class="sector-name" style="color:var(--t3);">P. Celulose</div>
+      <div class="sector-status" style="color:var(--t3);">Futuro</div>
+    </div>
+    <div class="sector-chip sector-chip-off">
+      <div class="sector-emoji">&#128667;</div>
+      <div class="sector-name" style="color:var(--t3);">Logística</div>
+      <div class="sector-status" style="color:var(--t3);">Futuro</div>
+    </div>
+  </div>
+
+  <!-- Companies table -->
+  <div class="card" style="margin-bottom:28px;">
+    <table>
+      <thead>
+        <tr>
+          <th>Empresa</th>
+          <th>Ticker</th>
+          <th>Subsetor</th>
+          <th>Status</th>
+          <th>Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:var(--t1);">Boa Safra Sementes</strong></td>
+          <td><code style="font-size:11px; color:var(--yellow);">SOJA3</code></td>
+          <td>Sementes</td>
+          <td><span class="tag tag-teal">Disponível</span></td>
+          <td><span class="tag tag-orange">C — Mod-Alto</span></td>
+        </tr>
+        <tr><td>SLC Agrícola</td><td><code style="font-size:11px; color:var(--t3);">SLCE3</code></td><td>Grãos</td><td><span class="tag tag-gray">Em breve</span></td><td style="color:var(--t3);">—</td></tr>
+        <tr><td>BrasilAgro</td><td><code style="font-size:11px; color:var(--t3);">AGRO3</code></td><td>Terras Agrícolas</td><td><span class="tag tag-gray">Em breve</span></td><td style="color:var(--t3);">—</td></tr>
+        <tr><td>São Martinho</td><td><code style="font-size:11px; color:var(--t3);">SMTO3</code></td><td>Sucroalcooleiro</td><td><span class="tag tag-gray">Em breve</span></td><td style="color:var(--t3);">—</td></tr>
+        <tr><td>Jalles Machado</td><td><code style="font-size:11px; color:var(--t3);">JALL3</code></td><td>Sucroalcooleiro</td><td><span class="tag tag-gray">Em breve</span></td><td style="color:var(--t3);">—</td></tr>
+        <tr><td>JBS</td><td><code style="font-size:11px; color:var(--t3);">JBSS3</code></td><td>Proteína Animal</td><td><span class="tag tag-gray">Em breve</span></td><td style="color:var(--t3);">—</td></tr>
+        <tr><td>Minerva Foods</td><td><code style="font-size:11px; color:var(--t3);">BEEF3</code></td><td>Proteína Animal</td><td><span class="tag tag-gray">Em breve</span></td><td style="color:var(--t3);">—</td></tr>
+        <tr><td>Marfrig</td><td><code style="font-size:11px; color:var(--t3);">MRFG3</code></td><td>Proteína Animal</td><td><span class="tag tag-gray">Em breve</span></td><td style="color:var(--t3);">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+
+<!-- PAGE 7b — STACK + ROADMAP -->
+<div class="page content-page">
+  <div class="page-header">
+    <div class="page-header-logo">Climate<span>Risk</span> Analytics</div>
+    <div class="page-header-section">Stack & Roadmap</div>
+    <div class="page-number">07b</div>
+  </div>
+
+  <!-- Tech Stack -->
+  <div class="section-eyebrow">Stack tecnológico</div>
+  <div style="margin-bottom:24px;">
+    <h3 class="card-title" style="font-size:14px; margin-bottom:12px;">Tecnologias utilizadas no protótipo</h3>
+    <div style="display:flex; flex-wrap:wrap; gap:0; margin-left:-4px;">
+      <span class="tech-chip"><span class="tech-dot" style="background:#61DAFB;"></span>React 18</span>
+      <span class="tech-chip"><span class="tech-dot" style="background:#38BDF8;"></span>Tailwind CSS</span>
+      <span class="tech-chip"><span class="tech-dot" style="background:#FBC102;"></span>CSS Custom Properties</span>
+      <span class="tech-chip"><span class="tech-dot" style="background:#EC4899;"></span>Framer Motion</span>
+      <span class="tech-chip"><span class="tech-dot" style="background:#5B73E8;"></span>Axios</span>
+      <span class="tech-chip"><span class="tech-dot" style="background:#F97316;"></span>Lucide Icons</span>
+      <span class="tech-chip"><span class="tech-dot" style="background:#00C8BB;"></span>Context API</span>
+      <span class="tech-chip"><span class="tech-dot" style="background:#8B5CF6;"></span>Inter (Google Fonts)</span>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Roadmap -->
+  <div class="section-eyebrow">Expansão</div>
+  <div>
+    <h3 class="card-title" style="font-size:14px; margin-bottom:12px;">Roadmap</h3>
+    <div class="road-item">
+      <span class="road-phase road-now">Agora</span>
+      <div>
+        <strong style="font-size:12px; color:var(--t1); display:block; margin-bottom:3px;">Protótipo — Agronegócio · SOJA3</strong>
+        <p class="small">Dashboard completo para Boa Safra Sementes com 4 APIs ao vivo, mapa de risco por estado, rating climático e alertas acionáveis.</p>
+      </div>
+    </div>
+    <div class="road-item">
+      <span class="road-phase road-next">Próximo</span>
+      <div>
+        <strong style="font-size:12px; color:var(--t1); display:block; margin-bottom:3px;">Expansão Agronegócio — 8 empresas</strong>
+        <p class="small">Análise completa para SLCE3, AGRO3, SMTO3, JALL3, JBSS3, BEEF3 e MRFG3. Exportação de relatórios PDF nativo. Alertas por e-mail.</p>
+      </div>
+    </div>
+    <div class="road-item">
+      <span class="road-phase road-later">Futuro</span>
+      <div>
+        <strong style="font-size:12px; color:var(--t1); display:block; margin-bottom:3px;">Novos setores — Energia, Saneamento, Mineração</strong>
+        <p class="small">Cobertura multissetorial com metodologia de rating adaptada por setor. API proprietária para integração com sistemas internos da XP.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- PAGE 8 — IDENTIDADE VISUAL + CONTATO -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<div class="page content-page" style="display:flex; flex-direction:column; justify-content:space-between;">
+  <div>
+    <div class="page-header">
+      <div class="page-header-logo">Climate<span>Risk</span> Analytics</div>
+      <div class="page-header-section">Identidade Visual</div>
+      <div class="page-number">08</div>
+    </div>
+
+    <div class="section-eyebrow">Design system</div>
+    <div class="section-title">Identidade Visual</div>
+    <p class="section-sub" style="margin-bottom:24px;">Paleta dark com dois acentos cromáticos: amarelo (ação/alerta) e teal (dados ao vivo/positivo).</p>
+
+    <!-- Color palette -->
+    <div class="grid-4" style="margin-bottom:20px;">
+      <div>
+        <div style="height:50px; border-radius:8px; background:#020202; border:1px solid rgba(255,255,255,0.1); margin-bottom:8px;"></div>
+        <div style="font-size:11px; font-weight:600; color:var(--t2);">Background</div>
+        <div style="font-size:10px; color:var(--t3); font-family:monospace;">#020202</div>
+      </div>
+      <div>
+        <div style="height:50px; border-radius:8px; background:#1F1F1F; border:1px solid rgba(255,255,255,0.08); margin-bottom:8px;"></div>
+        <div style="font-size:11px; font-weight:600; color:var(--t2);">Surface / Card</div>
+        <div style="font-size:10px; color:var(--t3); font-family:monospace;">#1F1F1F</div>
+      </div>
+      <div>
+        <div style="height:50px; border-radius:8px; background:#FBC102; margin-bottom:8px;"></div>
+        <div style="font-size:11px; font-weight:600; color:var(--t2);">Yellow (Primary)</div>
+        <div style="font-size:10px; color:var(--t3); font-family:monospace;">#FBC102</div>
+      </div>
+      <div>
+        <div style="height:50px; border-radius:8px; background:#00C8BB; margin-bottom:8px;"></div>
+        <div style="font-size:11px; font-weight:600; color:var(--t2);">Teal (Secondary)</div>
+        <div style="font-size:10px; color:var(--t3); font-family:monospace;">#00C8BB</div>
+      </div>
+    </div>
+
+    <div class="grid-4" style="margin-bottom:24px;">
+      <div>
+        <div style="height:32px; border-radius:8px; background:#F2F2F2; margin-bottom:6px;"></div>
+        <div style="font-size:10px; color:var(--t3); font-family:monospace;">Text-1 · #F2F2F2</div>
+      </div>
+      <div>
+        <div style="height:32px; border-radius:8px; background:#C5C5C4; margin-bottom:6px;"></div>
+        <div style="font-size:10px; color:var(--t3); font-family:monospace;">Text-2 · #C5C5C4</div>
+      </div>
+      <div>
+        <div style="height:32px; border-radius:8px; background:#ef4444; margin-bottom:6px;"></div>
+        <div style="font-size:10px; color:var(--t3); font-family:monospace;">Red · #ef4444</div>
+      </div>
+      <div>
+        <div style="height:32px; border-radius:8px; background:#f97316; margin-bottom:6px;"></div>
+        <div style="font-size:10px; color:var(--t3); font-family:monospace;">Orange · #f97316</div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <hr class="divider">
+    <div class="section-eyebrow" style="margin-top:4px;">Tipografia</div>
+    <div class="card" style="margin-bottom:20px;">
+      <div style="display:flex; gap:32px; align-items:center; flex-wrap:wrap;">
+        <div>
+          <div style="font-size:32px; font-weight:900; color:var(--t1); letter-spacing:-1px; line-height:1;">Inter 900</div>
+          <div style="font-size:10px; color:var(--t3); margin-top:4px;">Hero / Cover titles</div>
+        </div>
+        <div>
+          <div style="font-size:20px; font-weight:700; color:var(--t1); line-height:1;">Inter 700</div>
+          <div style="font-size:10px; color:var(--t3); margin-top:4px;">Section headings</div>
+        </div>
+        <div>
+          <div style="font-size:14px; font-weight:500; color:var(--t2); line-height:1;">Inter 500</div>
+          <div style="font-size:10px; color:var(--t3); margin-top:4px;">Body text</div>
+        </div>
+        <div>
+          <div style="font-size:11px; font-weight:700; color:var(--yellow); letter-spacing:0.1em; text-transform:uppercase; line-height:1;">Inter 700 Caps</div>
+          <div style="font-size:10px; color:var(--t3); margin-top:4px;">Labels / eyebrows</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back cover / CTA -->
+  <div style="background: linear-gradient(135deg, rgba(251,193,2,0.08) 0%, rgba(0,200,187,0.06) 100%); border:1px solid rgba(251,193,2,0.2); border-radius:16px; padding:32px 36px; text-align:center;">
+    <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:16px;">
+      <div style="width:36px; height:36px; border-radius:9px; background:var(--yellow-d); border:1.5px solid var(--yellow-b); display:flex; align-items:center; justify-content:center;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M3 17L9 11L13 15L21 7" stroke="#FBC102" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M14 7H21V14" stroke="#FBC102" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span style="font-size:22px; font-weight:800; color:var(--t2); letter-spacing:-0.4px;">Climate<span style="color:var(--yellow);">Risk</span> Analytics</span>
+    </div>
+    <p style="font-size:14px; color:var(--t3); line-height:1.7; max-width:440px; margin:0 auto 20px;">
+      Protótipo desenvolvido para demonstrar a viabilidade de integrar dados climáticos em tempo real
+      à análise de risco de empresas listadas na B3.
+    </p>
+    <div style="display:flex; justify-content:center; gap:24px; flex-wrap:wrap;">
+      <div style="text-align:center;">
+        <div style="font-size:10px; color:var(--t3); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:3px;">Desenvolvido para</div>
+        <div style="font-size:14px; font-weight:700; color:var(--t1);">XP Investimentos</div>
+      </div>
+      <div style="width:1px; background:var(--border);"></div>
+      <div style="text-align:center;">
+        <div style="font-size:10px; color:var(--t3); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:3px;">Versão</div>
+        <div style="font-size:14px; font-weight:700; color:var(--t1);">Protótipo v1.0</div>
+      </div>
+      <div style="width:1px; background:var(--border);"></div>
+      <div style="text-align:center;">
+        <div style="font-size:10px; color:var(--t3); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:3px;">Data</div>
+        <div style="font-size:14px; font-weight:700; color:var(--t1);">Abril · 2026</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
