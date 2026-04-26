@@ -13,7 +13,7 @@ export const BOA_SAFRA = {
   horizon: 'Curto/Médio',
   horizonPeriod: '3–12 meses',
   criticalRegions: ['MT', 'GO', 'MS', 'BA', 'PI'],
-  lastUpdate: '15 Abr 2025 · 18:30',
+  lastUpdate: '15 Abr 2026 · 18:30',
 
   alerts: [
     {
@@ -45,9 +45,9 @@ export const BOA_SAFRA = {
   corporateNews: [
     {
       id: 'n1',
-      title: 'Boa Safra revisa projeções de volume para 2025 após irregularidades climáticas',
+      title: 'Boa Safra revisa projeções de volume para 2026 após irregularidades climáticas',
       source: 'Valor Econômico',
-      date: '15/04/2025',
+      date: '15/04/2026',
       impact: 'Receita e estoque',
       impactType: 'negative',
     },
@@ -55,7 +55,7 @@ export const BOA_SAFRA = {
       id: 'n2',
       title: 'Empresa amplia capacidade de armazenagem no MT como estratégia de mitigação',
       source: 'AgFeed',
-      date: '10/04/2025',
+      date: '10/04/2026',
       impact: 'Positivo — reduz risco logístico',
       impactType: 'positive',
     },
@@ -63,7 +63,7 @@ export const BOA_SAFRA = {
       id: 'n3',
       title: 'Analistas alertam para inadimplência de produtores em ano de seca',
       source: 'InfoMoney',
-      date: '08/04/2025',
+      date: '08/04/2026',
       impact: 'Capital de giro e provisões',
       impactType: 'negative',
     },
@@ -189,7 +189,7 @@ export const BOA_SAFRA = {
       { label: 'Ticker', value: 'SOJA3' },
       { label: 'Mercado', value: 'B3 · Novo Mercado' },
       { label: 'Rating Climático', value: 'C · Moderado-Alto' },
-      { label: 'Última Revisão', value: 'Abr 2025' },
+      { label: 'Última Revisão', value: 'Abr 2026' },
     ],
   },
 };

@@ -153,7 +153,7 @@ export function LandingScreen({ onEnter, onGoToDashboard }) {
         <div style={{ maxWidth: '1040px', margin: '0 auto', padding: '22px 16px' }}>
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '32px', flexWrap: 'wrap' }}>
             {[
-              { value: '3', label: 'Empresas analisadas' },
+              { value: '1', label: 'Empresa analisada' },
               { value: '7', label: 'Setores cobertos' },
               { value: '27', label: 'Estados mapeados' },
             ].map(({ value, label }, i, arr) => (
@@ -465,7 +465,7 @@ export function LandingScreen({ onEnter, onGoToDashboard }) {
             Climate<span style={{ color: '#FBC102' }}>Risk</span>
           </span>
         </div>
-        Desenvolvido para XP Investimentos · 2025
+        Desenvolvido para XP Investimentos · 2026
       </footer>
 
     </div>

@@ -7,19 +7,19 @@ export const MOCK_CORPORATE = [
   {
     id: 'm1',
     title: 'Boa Safra registra queda de 12% no volume de sementes vendidas no 3T24 em razão da irregularidade hídrica no Centro-Oeste.',
-    source: 'Valor Econômico', date: 'Abr 2025', impactType: 'neutral', impact: 'Receita',
+    source: 'Valor Econômico', date: 'Abr 2026', impactType: 'neutral', impact: 'Receita',
     url: 'https://valor.globo.com/agronegocios/busca/?q=boa+safra+sementes+SOJA3',
   },
   {
     id: 'm2',
     title: 'Gestão amplia capital de giro em R$ 85M para cobrir pressão de inadimplência de cooperativas afetadas pela seca.',
-    source: 'Reuters', date: 'Mar 2025', impactType: 'warning', impact: 'Capital',
+    source: 'Reuters', date: 'Mar 2026', impactType: 'warning', impact: 'Capital',
     url: 'https://www.reuters.com/search/news?blob=boa+safra+sementes+soja+brasil',
   },
   {
     id: 'm3',
     title: 'Inadimplência de clientes no MATOPIBA sobe para 8,3% no trimestre, acima da estimativa de 5,5% do mercado.',
-    source: 'InfoMoney', date: 'Mar 2025', impactType: 'negative', impact: 'Inadimplência',
+    source: 'InfoMoney', date: 'Mar 2026', impactType: 'negative', impact: 'Inadimplência',
     url: 'https://infomoney.com.br/busca/?q=SOJA3+inadimplencia+MATOPIBA',
   },
 ];
