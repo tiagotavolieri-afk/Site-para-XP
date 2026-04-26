@@ -126,7 +126,7 @@ export function Header() {
           }}
         >
           <CRLogo size={28} />
-          <div style={{ lineHeight: 1.15 }}>
+          <div className="cr-logo-text" style={{ lineHeight: 1.15 }}>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 0 }}>
               <span style={{ fontSize: 15, fontWeight: 700, color: '#eef2f7', letterSpacing: '-0.03em' }}>
                 Climate

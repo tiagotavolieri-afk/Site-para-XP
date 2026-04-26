@@ -208,6 +208,7 @@ button, a {
 .cr-live-text        { display: inline; }
 .cr-back-text        { display: inline; }
 .cr-hero-br          { display: block; }
+.cr-logo-text        { display: block; }
 .grid-rating-comp    { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
 
 /* ── Tablet (≤ 1024px) ────────────────────────────── */
@@ -224,6 +225,7 @@ button, a {
   .cr-section       { padding: 48px 16px; }
   .cr-stat-divider  { display: none; }
   .cr-live-text     { display: none; }
+  .cr-logo-text     { display: none; }
 
   .grid-sectors        { grid-template-columns: repeat(2, 1fr); }
   .grid-companies      { grid-template-columns: repeat(2, 1fr); }
@@ -245,6 +247,7 @@ button, a {
   .cr-section       { padding: 40px 14px; }
   .cr-back-text     { display: none; }
   .cr-nav-label     { display: none; }
+  .cr-logo-text     { display: none; }
   .grid-rating-comp { grid-template-columns: 1fr; }
 
   .grid-companies       { grid-template-columns: repeat(2, 1fr); }
